@@ -9,8 +9,8 @@ let lastScript: string | undefined = undefined
 export function activate(context: vscode.ExtensionContext) {
    statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Right)
    statusBarItem.command = 'npm-runner.server'
-   context.subscriptions.push(statusBarItem)
    updateStatusBar(lastScript)
+   context.subscriptions.push(statusBarItem)
 
    const disposable = vscode.commands.registerCommand('npm-runner.server', async () => {
       const data = await getPackageJsonContent()
@@ -60,30 +60,36 @@ async function getPackageJsonContent(): Promise<Record<any, any> | void> {
    // Getting the workspace folder URI
    const workspaceFolder = vscode.workspace.workspaceFolders?.[0]
    if (!workspaceFolder?.uri) {
-      vscode.window.showErrorMessage('No workspace folder is open')
-      updateStatusBar(lastScript)
+      vscode.window.showWarningMessage('No workspace folder is open')
+      updateStatusBar()
       return
    }
    path = workspaceFolder?.uri
 
-   // Getting the active text editor's document URI
-   const active = vscode.window.activeTextEditor?.document.uri
-   if (active) {
-      const len = path.fsPath.split('\\').length
-      const subfolder = active.fsPath
-         .split('\\')
-         .slice(0, len + 1)
-         .join('\\')
-      path = vscode.Uri.file(subfolder)
-   }
-
    // Getting package.json
-   const packageJsonUri = vscode.Uri.joinPath(path, 'package.json')
+   let packageJsonUri = vscode.Uri.joinPath(path, 'package.json')
    try {
       await vscode.workspace.fs.stat(packageJsonUri) // перевірка чи існує файл
    } catch (err) {
-      vscode.window.showErrorMessage('package.json not found in the current workspace folder.')
-      return
+      // Getting active file URI
+      const active = vscode.window.activeTextEditor?.document.uri
+      if (active) {
+         const len = path.fsPath.split('\\').length
+         const subfolder = active.fsPath
+            .split('\\')
+            .slice(0, len + 1)
+            .join('\\')
+         path = vscode.Uri.file(subfolder)
+      }
+
+      // Getting package.json
+      packageJsonUri = vscode.Uri.joinPath(path, 'package.json')
+      try {
+         await vscode.workspace.fs.stat(packageJsonUri) // перевірка чи існує файл
+      } catch (err) {
+         vscode.window.showErrorMessage('package.json not found in the current workspace folder.')
+         return
+      }
    }
 
    // Getting content
