@@ -1,8 +1,9 @@
 {
-   "name": "npm-runner",
-   "displayName": "npm-runner",
+   "name": "npm-runner-yageey",
+   "displayName": "NPM Runner by yaGeey",
    "description": "",
    "version": "0.0.1",
+   "publisher": "yaGeey",
    "engines": {
       "vscode": "^1.102.0"
    },
@@ -11,6 +12,10 @@
    ],
    "activationEvents": [],
    "main": "./out/extension.js",
+   "repository": {
+      "type": "git",
+      "url": "https://github.com/yaGeey/npm-runner-vscode-extension.git"
+   },
    "contributes": {
       "commands": [
          {
