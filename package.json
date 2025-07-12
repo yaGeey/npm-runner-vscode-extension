@@ -1,6 +1,6 @@
 {
-   "name": "npm-dev-runner",
-   "displayName": "npm-dev-runner",
+   "name": "npm-runner",
+   "displayName": "npm-runner",
    "description": "",
    "version": "0.0.1",
    "engines": {
@@ -14,12 +14,18 @@
    "contributes": {
       "commands": [
          {
-            "command": "npm-dev-runner.helloWorld",
-            "title": "Hello World"
+            "command": "npm-runner.server",
+            "title": "Toggle Dev Server"
+         }
+      ],
+      "keybindings": [
+         {
+            "command": "npm-runner.server",
+            "key": "ctrl+alt+s"
          },
          {
-            "command": "npm-dev-runner.toggleDevServer",
-            "title": "Toggle Dev Server"
+            "command": "npm-runner.change-last",
+            "key": "ctrl+alt+w"
          }
       ]
    },
