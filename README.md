@@ -1,13 +1,15 @@
+![img](new.png)
+
 # NPM Runner
 
 A simple VS Code extension that adds a status bar button to run `npm` scripts like `dev` or `start`.
 
 ## Features
 
-- Click the status bar to toggle `npm run <script>`
-- Automatically picks `dev`, `start`, or the first script
-- Change default script with `Ctrl+Alt+W`
-- Works with subfolders and nested `package.json`
+-  Click the status bar to toggle `npm run <script>`
+-  Automatically picks `dev`, `start`, or the first script
+-  Change default script with `Ctrl+Alt+W`
+-  Works with subfolders and nested `package.json`
 
 ## Usage
 

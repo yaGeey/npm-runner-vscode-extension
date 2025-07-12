@@ -3,6 +3,7 @@
    "displayName": "NPM Runner by yaGeey",
    "description": "",
    "version": "0.0.1",
+   "icon": "new.png",
    "publisher": "yaGeey",
    "engines": {
       "vscode": "^1.102.0"
